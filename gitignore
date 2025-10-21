@@ -1,0 +1,15 @@
+# === Backend (Spring Boot) ===
+/lms_be/target/
+/lms_be/.idea/
+/lms_be/.classpath
+/lms_be/.project
+/lms_be/.settings/
+/lms_be/*.iml
+
+# === Frontend (ReactJS) ===
+/lms_fe/node_modules/
+/lms_fe/.env.local
+/lms_fe/.env.development.local
+/lms_fe/.env.test.local
+/lms_fe/.env.production.local
+/lms_fe/build/

@@ -1,0 +1,14 @@
+{
+  "courseCode": "JAVA101",
+  "title": "Java for Beginners",
+  "duration": 12.5,
+  "price": 99.99,
+  "description": "Learn Java from scratch",
+  "status": "PUBLISHED",
+  "lecturerId": 1,
+  "categoryIds": [2, 3],
+  "sections": [
+    { "title": "Introduction", "orderIndex": 1 },
+    { "title": "OOP Basics", "orderIndex": 2 }
+  ]
+}

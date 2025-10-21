@@ -1,0 +1,161 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "code": "J100",
+      "title": "Java Core",
+      "duration": 3,
+      "price": 1500000,
+      "lecturer": "Nam",
+      "description": "Java SE Programming Language",
+      "completedLectures": 5,
+      "totalLectures": 10
+    },
+    {
+      "id": "2",
+      "code": "J200",
+      "title": "Spring Boot Fundamentals",
+      "duration": 4,
+      "price": 2500000,
+      "lecturer": "Lan",
+      "description": "Build RESTful APIs with Spring Boot",
+      "completedLectures": 2,
+      "totalLectures": 12
+    },
+    {
+      "id": "3",
+      "code": "J300",
+      "title": "Spring Security & JWT",
+      "duration": 2,
+      "price": 1800000,
+      "lecturer": "Minh",
+      "description": "Authentication & Authorization with Spring Security",
+      "completedLectures": 1,
+      "totalLectures": 8
+    },
+    {
+      "id": "4",
+      "code": "J400",
+      "title": "Spring Cloud & Microservices",
+      "duration": 6,
+      "price": 4000000,
+      "lecturer": "Hoa",
+      "description": "Microservices architecture with Spring Cloud",
+      "completedLectures": 0,
+      "totalLectures": 15
+    },
+    {
+      "id": "5",
+      "code": "J500",
+      "title": "Hibernate & JPA",
+      "duration": 3,
+      "price": 2000000,
+      "lecturer": "Khanh",
+      "description": "ORM and data persistence with Hibernate & JPA",
+      "completedLectures": 3,
+      "totalLectures": 9
+    },
+    {
+      "id": "6",
+      "code": "J600",
+      "title": "Reactive Programming with WebFlux",
+      "duration": 4,
+      "price": 2800000,
+      "lecturer": "Tuan",
+      "description": "Build reactive applications using Spring WebFlux",
+      "completedLectures": 4,
+      "totalLectures": 12
+    },
+    {
+      "id": "7",
+      "code": "J700",
+      "title": "Kubernetes for Java Developers",
+      "duration": 5,
+      "price": 3500000,
+      "lecturer": "Dung",
+      "description": "Container orchestration with Kubernetes",
+      "completedLectures": 1,
+      "totalLectures": 14
+    },
+    {
+      "id": "8",
+      "code": "J800",
+      "title": "Docker & DevOps Basics",
+      "duration": 3,
+      "price": 2200000,
+      "lecturer": "Phuong",
+      "description": "Learn Docker fundamentals and DevOps workflows",
+      "completedLectures": 2,
+      "totalLectures": 10
+    },
+    {
+      "id": "9",
+      "code": "J900",
+      "title": "Design Patterns in Java",
+      "duration": 2,
+      "price": 1700000,
+      "lecturer": "Long",
+      "description": "Understand and apply common Java design patterns",
+      "completedLectures": 0,
+      "totalLectures": 7
+    },
+    {
+      "id": "10",
+      "code": "J1000",
+      "title": "Advanced Java Concurrency",
+      "duration": 4,
+      "price": 3000000,
+      "lecturer": "Anh",
+      "description": "Multithreading and concurrency utilities in Java",
+      "completedLectures": 2,
+      "totalLectures": 11
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "name": "ADMIN"
+    },
+    {
+      "id": "2",
+      "name": "LECTURER"
+    },
+    {
+      "id": "3",
+      "name": "STUDENT"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "userName": "admin",
+      "password": "admin123",
+      "email": "admin@example.com",
+      "fullName": "System Admin",
+      "roleId": 1
+    },
+    {
+      "id": "2",
+      "userName": "nam",
+      "password": "123456",
+      "email": "nam@example.com",
+      "fullName": "Nguyen Nam",
+      "roleId": 2
+    },
+    {
+      "id": "3",
+      "userName": "student01",
+      "password": "123456",
+      "email": "student01@example.com",
+      "fullName": "Tran Student",
+      "roleId": 3
+    },
+    {
+      "id": "a47d",
+      "userName": "dieunt25",
+      "email": "dieu@gmail.com",
+      "password": "12345",
+      "fullName": "Nguyen Anh Phuong"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Đặt quy tắc line endings cho toàn dự án
+* text=auto
+
+# Windows batch scripts giữ CRLF
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Shell scripts giữ LF
+*.sh text eol=lf

@@ -1,0 +1,36 @@
+.login-box {
+  width: 100%;
+  max-width: 450px;
+  background-color: #fff;
+}
+
+.divider-or {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.divider-or::before,
+.divider-or::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.divider-or::before {
+  left: 0;
+}
+
+.divider-or::after {
+  right: 0;
+}
+
+.divider-or span {
+  background-color: #fff;
+  padding: 0 10px;
+  color: #888;
+  font-size: 0.9rem;
+}
