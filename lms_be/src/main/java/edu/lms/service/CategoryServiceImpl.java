@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,10 +21,20 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<CategoryResponse> findAll(int page, int size) {
+
         PageRequest pageRequest = PageRequest.of(page, size);
-        return categoryRepository.findAll(pageRequest)
+
+        Page<Category> categoryPage = categoryRepository.findAll(pageRequest);
+
+        List<Category> categories = categoryPage.getContent();
+
+        log.info("Course list {}", categories.get(0).getCourses()); // Query
+
+        return categoryPage
                 .map((category) -> CategoryResponse.builder().id(category.getId()).name(category.getName()).build());
     }
+
+
 
     @Override
     public boolean createCategory(Category category) {
@@ -43,6 +54,12 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryResponse> findAll() {
         return categoryRepository.findAll().stream()
                 .map((category -> CategoryResponse.builder().id(category.getId()).name(category.getName()).description(category.getDescription()).build())).toList();
+    }
+
+    @Override
+    @Transactional
+    public Category findById(long id) {
+        return categoryRepository.findById(id).get();
     }
 
 

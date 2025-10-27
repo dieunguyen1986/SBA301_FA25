@@ -9,6 +9,7 @@ import edu.lms.repository.CourseRepository;
 import edu.lms.specification.CourseSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class CourseServiceImpl implements CourseService {
-
+    private final ModelMapper modelMapper;
     private final CourseRepository courseRepository; // Inject Bean - best practice
 
     @Override
@@ -53,8 +54,6 @@ public class CourseServiceImpl implements CourseService {
 
         // Convert to Course
 
-
-        courseRepository.save(null);
         return null;
 
     }
@@ -77,5 +76,13 @@ public class CourseServiceImpl implements CourseService {
 
         //convert to response
         return null;
+    }
+
+    private Course convertToEntity(CourseRequest courseRequest) {
+        return modelMapper.map(courseRequest, Course.class);
+    }
+
+    private CourseResponse convertToDto(Course course) {
+        return modelMapper.map(course, CourseResponse.class);
     }
 }

@@ -17,6 +17,7 @@ import java.util.Set;
 @Table(schema = "catalog", uniqueConstraints = {@UniqueConstraint(name = "UNI_CODE", columnNames = {"course_code"})})
 @NamedQueries(@NamedQuery(name = "findAll", query = "FROM Course c"))
 @NamedEntityGraphs(@NamedEntityGraph(name = "findAllBySpecLecturer", attributeNodes = {@NamedAttributeNode("lecturer"), @NamedAttributeNode("category")}))
+@ToString(exclude = {"sections", "enrollments", "category", "reviews", "lecturer"})
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

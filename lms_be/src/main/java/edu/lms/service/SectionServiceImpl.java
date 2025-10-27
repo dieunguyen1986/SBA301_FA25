@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class SectionServiceImpl implements SectionService {
 
 
     @Override
+    @Transactional
     public Page<SectionResponse> findAll(int page, int size) {
         return sectionRepository.findAll(PageRequest.of(page, size)).map((section) -> SectionResponse.builder()
                 .id(section.getId())

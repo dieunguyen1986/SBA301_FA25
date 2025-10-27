@@ -12,4 +12,6 @@ public interface CategoryService {
     boolean createCategory(Category category);
 
     List<CategoryResponse> findAll();
+
+    Category findById(long id);
 }

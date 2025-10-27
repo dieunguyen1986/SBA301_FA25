@@ -41,5 +41,15 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.findAll(page, size));
     }
 
+    @GetMapping("/categories/{id}")
+    public ResponseEntity<Category> findById(@PathVariable Long id) {
+        Category category = categoryService.findById(id);
+
+        log.info("Category found with id {}", category.getName());
+
+        log.info("Course list {}", category.getCourses());
+        return ResponseEntity.ok().body(category);
+    }
+
 
 }

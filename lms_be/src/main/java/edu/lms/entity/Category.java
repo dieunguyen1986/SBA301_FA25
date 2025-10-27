@@ -27,7 +27,7 @@ public class Category {
 
     private String description;
 
-    @ManyToMany(mappedBy = "category")
+    @ManyToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Course> courses = new HashSet<>();
 
