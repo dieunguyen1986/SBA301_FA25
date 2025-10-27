@@ -16,7 +16,7 @@ export const CategoryManagement = () => {
   const fetchCategories = async (pageNum = 0) => {
     try {
       setLoading(true);
-      const data = await categoryApi.getAll(pageNum, size);
+      const data = await categoryApi.getAllPaged(pageNum, size);
       setCategories(data.content);
       setTotalPages(data.totalPages);
       setPage(data.number);

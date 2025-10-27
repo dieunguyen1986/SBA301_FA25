@@ -11,10 +11,10 @@ const courseManagementApi = {
     } catch (error) {
       console.log(`Fetch data is fail: ${error.message}`);
       throw error;
-    }
+    } 
   },
   createCourse: async (course) => {
-     const response = await axiosClient.post("/api/lecturer/courses", course);
+     const response = await axiosClient.post("/api/v1/lecturer/courses", course);
       return response.data;
   },
   getCourseById: async(courseCode)=> {}

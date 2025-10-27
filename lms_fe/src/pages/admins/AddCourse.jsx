@@ -19,13 +19,12 @@ const AddCourse = () => {
   const [categories, setCategories] = useState([]);
   const [lecturers, setLecturers] = useState([]);
   const [message, setMessage] = useState("");
-  const {users} = useAuth();
+  const { users } = useAuth();
 
   const currentRole = users?.roles || [];
 
   console.log("Current roles: ", currentRole);
   const isAdmin = currentRole.includes("ROLE_ADMIN");
-
 
   const {
     register,
@@ -48,21 +47,21 @@ const AddCourse = () => {
     const initData = async () => {
       try {
         if (isAdmin) {
-        const [catResponse, lecResponse] = await Promise.all([
-          categoryApi.getAll(),
-          lecturerApi.getAll(),
-        ]);
-        console.log("Categories:", catResponse.content);
-        console.log("Lecturers:", lecResponse.content);
+          const [catResponse, lecResponse] = await Promise.all([
+            categoryApi.getAll(),
+            lecturerApi.getAll(),
+          ]);
+          console.log("Categories:", catResponse.content);
+          console.log("Lecturers:", lecResponse.content);
 
-        setCategories(catResponse);
-        setLecturers(lecResponse);
-      } else {
-        const catResponse = await categoryApi.getAll();
-        console.log("Categories:", catResponse.content);
-        setCategories(catResponse); 
-      }
-     } catch (error) {
+          setCategories(catResponse);
+          setLecturers(lecResponse);
+        } else {
+          const catResponse = await categoryApi.getAll();
+          console.log("Categories:", catResponse.content);
+          setCategories(catResponse);
+        }
+      } catch (error) {
         setFetchErrors(error || "Cannot fetch data");
         console.error("Failed to fetch data:", error);
       }
@@ -70,34 +69,36 @@ const AddCourse = () => {
     initData();
   }, []);
 
-  const handleOnSubmit = async (data) => {
+  const handleOnSubmit = async (payload) => {
     console.log("Submitting form with data:", payload);
 
     try {
-      await courseManagementApi.createCourse(data);
+      const data = await courseManagementApi.createCourse(payload);
 
-      setMessage("Course created successfully!");
+      console.log(data.message);
 
-      alert("Course created successfully!");
+      setMessage(data.message);
     } catch (error) {
       console.error("Failed to submit form:", error);
     }
   };
 
   return (
-    <Container fluid className="mt-3 p-1 min-vh-100">
+    <Container fluid className="mt-5 p-1 min-vh-100">
       {/* Breadcrumb (Đường dẫn) */}
       <Breadcrumb>
         <Breadcrumb.Item href="#">Back to Course List</Breadcrumb.Item>
         <Breadcrumb.Item active>Create Course</Breadcrumb.Item>
       </Breadcrumb>
-      <Row
-        className="justify-content-center"
-        style={{ fontSize: "0.9rem" }}
-      >
-        <h2 className="mb-4">Course Detail</h2>
+      <Row className="d-flex justify-content-between" style={{ fontSize: "0.9rem" }}>
+         <h2 className="mb-4">Course Detail</h2> 
+        {message && (
+          <div className="mb-3 text-success fw-semibold">
+            {message}
+          </div>
+        )}
         <hr />
-        {message && <Form.Text className="text-success">{message}</Form.Text>}
+        
 
         <Col md={12} lg={12}>
           <Form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -204,39 +205,35 @@ const AddCourse = () => {
             </Form.Group>
 
             {/* Lecturer */}
-            {isAdmin ? 
-            (<Form.Group className="mb-3">
-              <Form.Label>Lecturer</Form.Label>
-              <Form.Select
-                name="lecturerId"
-                {...register("lecturerId", {
-                  required: "Pls select a lecturer",
-                })}
-              >
-                <option value="">-- Select Lecturer --</option>
-                {lecturers?.map((lec) => (
-                  <option key={lec.id} value={lec.id}>
-                    {lec.fullName}
-                  </option>
-                ))}
-              </Form.Select>
-              {errors.lecturerId && (
-                <Form.Text className="text-danger">
-                  {errors.lecturerId.message}
-                </Form.Text>
-              )}
-            </Form.Group>
+            {isAdmin ? (
+              <Form.Group className="mb-3">
+                <Form.Label>Lecturer</Form.Label>
+                <Form.Select
+                  name="lecturerId"
+                  {...register("lecturerId", {
+                    required: "Pls select a lecturer",
+                  })}
+                >
+                  <option value="">-- Select Lecturer --</option>
+                  {lecturers?.map((lec) => (
+                    <option key={lec.id} value={lec.id}>
+                      {lec.fullName}
+                    </option>
+                  ))}
+                </Form.Select>
+                {errors.lecturerId && (
+                  <Form.Text className="text-danger">
+                    {errors.lecturerId.message}
+                  </Form.Text>
+                )}
+              </Form.Group>
+            ) : null}
 
-              
-              ): null }
-
-            
-       
-              
             {/* Categories */}
             <Form.Group className="mb-3">
               <Form.Label>Categories</Form.Label>
-              <Form.Select className="fs-6"
+              <Form.Select
+                className="fs-6"
                 multiple
                 {...register("categoryIds", {
                   required: "Pls select ay least one category",
