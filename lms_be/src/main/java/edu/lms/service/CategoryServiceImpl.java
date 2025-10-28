@@ -6,6 +6,7 @@ import edu.lms.exception.ObjectExistingException;
 import edu.lms.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
+    @Transactional
     public Page<CategoryResponse> findAll(int page, int size) {
 
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -37,7 +39,8 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     @Override
-    public boolean createCategory(Category category) {
+    @Transactional
+    public Category createCategory(Category category) {
         // Lưu ý về business validate/rules
         log.info("Service - Creating new category {}", category);
         if (categoryRepository.existsByName(category.getName())) {
@@ -45,9 +48,9 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         // call other service
-        categoryRepository.save(category);
+        Category result = categoryRepository.save(category);  // persistence
 
-        return true;
+        return result;
     }
 
     @Override
@@ -60,6 +63,22 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public Category findById(long id) {
         return categoryRepository.findById(id).get();
+    }
+
+    @Override
+    @Transactional
+    public Category deleteCategory(Long id) {
+        Category category = categoryRepository.findById(id).orElseThrow(()->{
+            throw new ObjectNotFoundException("Category with name " + Category.class.getName() + " not found", id);
+        });
+
+//        Category categoryToDelete = new Category(); // Transient
+//        categoryToDelete.setId(100L);
+
+        log.info("Category removed {}", category);
+        categoryRepository.delete(category);
+
+        return category;
     }
 
 

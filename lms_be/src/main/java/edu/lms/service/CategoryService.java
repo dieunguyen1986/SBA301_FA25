@@ -9,9 +9,11 @@ import java.util.List;
 public interface CategoryService {
     Page<CategoryResponse> findAll(int page, int size);
 
-    boolean createCategory(Category category);
+    Category createCategory(Category category);
 
     List<CategoryResponse> findAll();
 
     Category findById(long id);
+
+    Category deleteCategory(Long id);
 }

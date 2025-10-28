@@ -22,7 +22,9 @@ public class CategoryController {
     public ResponseEntity<?> createCategory(@Valid @RequestBody Category category) {
         log.debug("Creating new category {}", category);
 
-        categoryService.createCategory(category);
+        Category result = categoryService.createCategory(category); // Transient state
+
+        // result: detached
 
         return ResponseEntity.ok().build();
     }
@@ -47,9 +49,19 @@ public class CategoryController {
 
         log.info("Category found with id {}", category.getName());
 
-        log.info("Course list {}", category.getCourses());
+        //log.info("Course list {}", category.getCourses());
         return ResponseEntity.ok().body(category);
     }
+
+    @DeleteMapping("categories/{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
+        Category removedCategory = categoryService.deleteCategory(id);
+
+        log.info("Category removed with id {}", removedCategory.getId());
+        return ResponseEntity.ok().build();
+    }
+
+
 
 
 }

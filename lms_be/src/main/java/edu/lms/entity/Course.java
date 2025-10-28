@@ -2,6 +2,7 @@ package edu.lms.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,6 +19,8 @@ import java.util.Set;
 @NamedQueries(@NamedQuery(name = "findAll", query = "FROM Course c"))
 @NamedEntityGraphs(@NamedEntityGraph(name = "findAllBySpecLecturer", attributeNodes = {@NamedAttributeNode("lecturer"), @NamedAttributeNode("category")}))
 @ToString(exclude = {"sections", "enrollments", "category", "reviews", "lecturer"})
+@Cacheable
+@org.hibernate.annotations.Cache(region = "edu.lms.entity.Course", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
