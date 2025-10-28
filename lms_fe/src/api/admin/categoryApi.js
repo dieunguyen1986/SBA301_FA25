@@ -10,7 +10,10 @@ export const categoryApi = {
         const response = await axiosClient.get("/api/categories", {params: {paged: false}});
         return response.data;
     },
-    createCategory: async(data) => { await axiosClient.post("/api/categories", data); }
+    createCategory: async(data) => { await axiosClient.post("/api/categories", data); },
+    deleteCategory: async(id) => {
+        await axiosClient.delete(`/api/categories/${id}`);
+    },
     
 
 };

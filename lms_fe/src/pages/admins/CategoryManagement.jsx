@@ -11,6 +11,7 @@ export const CategoryManagement = () => {
   const [size, setSize] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [reRender, setRerender] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchCategories = async (pageNum = 0) => {
@@ -29,7 +30,24 @@ export const CategoryManagement = () => {
 
   useEffect(() => {
     fetchCategories();
-  }, [size]);
+  }, [reRender]);
+
+  const handleDelete = async (id) => {
+    const confirm = window.confirm("Do you want to delete this?");
+
+    if (confirm) {
+      try {
+        await categoryApi.deleteCategory(id);
+
+        alert("Delete successfully!");
+
+        setRerender(!reRender);
+        
+      } catch (error) {
+        setError("Fail to delete a category!");
+      }
+    }
+  };
 
   return (
     <section className="py-5 container">
@@ -78,9 +96,7 @@ export const CategoryManagement = () => {
                         size="sm"
                         variant="outline-danger"
                         onClick={() => {
-                          if (window.confirm("Are you sure?")) {
-                            // TODO: delete API
-                          }
+                          handleDelete(category.id);
                         }}
                       >
                         <TrashFill />
