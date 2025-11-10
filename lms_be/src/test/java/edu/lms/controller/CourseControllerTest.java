@@ -1,6 +1,7 @@
 package edu.lms.controller;
 
 import edu.lms.dto.CourseResponse;
+import edu.lms.security.JwtService;
 import edu.lms.service.CourseService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,9 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CourseController.class)
@@ -32,6 +31,9 @@ class CourseControllerTest {
 
     @MockitoBean
     private CourseService courseService;
+
+    @MockitoBean
+    private JwtService jwtService;
 
     @Test
     @DisplayName("GET /public/courses - success with searchKeyword")
