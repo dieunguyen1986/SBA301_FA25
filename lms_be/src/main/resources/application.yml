@@ -12,7 +12,7 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 2
       idle-timeout: 10000
-      connection-timeout: 20000
+      connection-timeout: 30000
       pool-name: HikariPool-LMS
   #    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 #    url: jdbc:sqlserver://host.docker.internal:1433;databaseName=lms_dbv1;encrypt=true;trustServerCertificate=true
