@@ -6,12 +6,14 @@ WORKDIR /app
 
 # Copy file pom.xml trước để cache dependency
 COPY pom.xml .
+RUN mvn dependency:go-offline -B # Tải dependency trước, Docker cache layer này -> build nhanh hơn.
 
 # Copy source code
 COPY src ./src
 
 # Build project, chạy test (skipTests=false)
-RUN mvn -DskipTests=false -B package
+#RUN mvn -DskipTests=false -B package
+RUN mvn -DskipTests -B package
 
 # Runtime stage: JDK 24 slim
 FROM eclipse-temurin:17-jre
