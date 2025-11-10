@@ -1,3 +1,6 @@
+# =========================
+# Stage 1: Build stage
+# =========================
 # Build stage dùng Maven + JDK 17
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 
@@ -6,16 +9,21 @@ WORKDIR /app
 
 # Copy file pom.xml trước để cache dependency
 COPY pom.xml .
-RUN mvn dependency:go-offline -B # Tải dependency trước, Docker cache layer này -> build nhanh hơn.
+#RUN mvn dependency:go-offline -B # Tải dependency trước, Docker cache layer này -> build nhanh hơn.
 
 # Copy source code
 COPY src ./src
 
 # Build project, chạy test (skipTests=false)
 #RUN mvn -DskipTests=false -B package
-RUN mvn -DskipTests -B package
+#RUN mvn -DskipTests -B package
+RUN mvn clean package -B -DskipTests=false
 
-# Runtime stage: JDK 24 slim
+
+# =========================
+# Stage 2: Runtime stage
+# =========================
+# Runtime stage: JDK 17 slim
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 
@@ -26,4 +34,5 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
 # Chạy ứng dụng Spring Boot
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","/app/app.jar"]
+#ENTRYPOINT ["java","-jar","app.jar"]

@@ -5,7 +5,7 @@ spring:
     name: lms_backend
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://localhost:1433;databaseName=lms_dbv1;encrypt=true;trustServerCertificate=true
+    url: jdbc:sqlserver://host.docker.internal:1433;databaseName=lms_dbv1;encrypt=true;trustServerCertificate=true
     username: sa
     password: MyS3cureP@ss!
   jpa:
