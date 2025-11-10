@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "Users", schema = "auth")
+@Table(name = "User", schema = "auth")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

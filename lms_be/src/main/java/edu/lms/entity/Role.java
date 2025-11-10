@@ -14,17 +14,17 @@ import java.util.Set;
 @Getter
 @Setter
 public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String name; // // ROLE_ADMIN, ROLE_INSTRUCTOR, ROLE_STUDENT
+        @Column(unique = true, nullable = false)
+        private String name; // // ROLE_ADMIN, ROLE_INSTRUCTOR, ROLE_STUDENT
 
-    private String description;
+        private String description;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+        @ManyToMany(mappedBy = "roles")
+        private Set<User> users = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER) // Load ngay lập tức
     @JoinTable(
