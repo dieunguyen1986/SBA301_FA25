@@ -1,5 +1,5 @@
 # Build stage dùng Maven + JDK 17
-FROM maven:3.9.6-eclipse-temurin-24 AS build
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 # Thư mục làm việc trong container
 WORKDIR /app
@@ -14,7 +14,7 @@ COPY src ./src
 RUN mvn -DskipTests=false -B package
 
 # Runtime stage: JDK 24 slim
-FROM eclipse-temurin:24-jdk-jammy AS runtime
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # Copy jar từ build stage
