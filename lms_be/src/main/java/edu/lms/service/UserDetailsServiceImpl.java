@@ -50,6 +50,7 @@ public class UserDetailsServiceImpl implements UserDetailsManager {
 
 
         List<SimpleGrantedAuthority> grantedAuthorities = user.getRoles().stream().map((role) -> new SimpleGrantedAuthority(role.getName())).toList();
+        // ROLE_ADMIN
 
         // Xử lý response
         UserDetails userResponse = org.springframework.security.core.userdetails.User.builder()

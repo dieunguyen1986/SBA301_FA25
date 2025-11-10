@@ -54,6 +54,8 @@ public class CourseServiceImpl implements CourseService {
 
         // Convert to Course
 
+        courseRepository.save(convertToEntity(courseRequest));
+
         return null;
 
     }
