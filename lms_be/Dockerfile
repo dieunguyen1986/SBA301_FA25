@@ -16,8 +16,8 @@ COPY src ./src
 
 # Build project, chạy test (skipTests=false)
 #RUN mvn -DskipTests=false -B package
-#RUN mvn -DskipTests -B package
-RUN mvn clean package -B -DskipTests=false
+RUN mvn -DskipTests -B package
+#RUN mvn clean package -B -DskipTests=false
 
 
 # =========================

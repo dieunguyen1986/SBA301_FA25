@@ -29,7 +29,7 @@ public class Course {
     @Column(name = "course_code")
     private String courseCode;
 
-    @Column(columnDefinition = "NVARCHAR(200)")
+    @Column(columnDefinition = "VARCHAR(200)")
     private String title;
 
     private double duration;

@@ -4,7 +4,8 @@ spring:
   application:
     name: lms_backend
   datasource:
-    url: jdbc:postgresql://dpg-d490qt0gjchc73f58km0-a/lms_db_u041
+    url: jdbc:postgresql://dpg-d490qt0gjchc73f58km0-a.singapore-postgres.render.com:5432/lms_db_u041
+    #url: jdbc:postgresql://dpg-d490qt0gjchc73f58km0-a:5432/lms_db_u041
     username: lms_db_u041_user
     password: LKKBbIiVtqudxTa62PQ9B8FqRR0DJXNP
     driver-class-name: org.postgresql.Driver
@@ -20,7 +21,7 @@ spring:
 #    password: MyS3cureP@ss!
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
